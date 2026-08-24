@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#101828" />
+<title>잔특 계산기 | 잔업·특근 예상 월급 계산</title>
+<meta name="description" content="생산직·현장직을 위한 잔업·특근 예상 월급 계산기. 월 통상임금과 잔업·특근 패턴을 넣으면 예상 세전 월급과 추가수당을 계산합니다." />
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e7ec;--accent:#1d4ed8;--accent2:#eff6ff;--danger:#b42318;--dangerbg:#fef3f2;--ok:#067647;--warn:#7a2e0e;--warnbg:#fffaeb}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;background:var(--bg);color:var(--text)}
+button,input,select{font:inherit}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 72px}
+.hero{padding:18px 2px 10px}.eyebrow{font-size:13px;font-weight:850;color:var(--accent)}
+h1{font-size:30px;line-height:1.15;margin:7px 0 8px;letter-spacing:-.7px}.sub{margin:0;color:var(--muted);line-height:1.55}
+.scope{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.scope span{font-size:12px;font-weight:800;padding:6px 9px;border-radius:999px;background:#fff;border:1px solid var(--line)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:14px;box-shadow:0 4px 18px rgba(16,24,40,.04)}
+.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}
+label{font-size:14px;font-weight:780}.hint{font-size:12px;color:var(--muted);line-height:1.5}.important{color:#344054;font-weight:750}
+.input-wrap{position:relative}.input-wrap input,.input-wrap select{width:100%;border:1px solid #d0d5dd;border-radius:12px;padding:13px 48px 13px 13px;font-size:16px;background:#fff;color:var(--text);outline:none;min-height:49px}.input-wrap select{padding-right:13px}.input-wrap input:focus,.input-wrap select:focus{border-color:#84adff;box-shadow:0 0 0 3px #eff4ff}.input-wrap input[readonly]{background:#f9fafb;color:#475467}.unit{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--muted);pointer-events:none}
+.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-size:13px;font-weight:750;cursor:pointer}.chip:hover{background:#f9fafb}.chip:focus-visible,.btn:focus-visible{outline:3px solid #84adff;outline-offset:2px}
+.info{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:12px;line-height:1.55;margin-top:12px}.warn{background:var(--warnbg);color:var(--warn);border:1px solid #fedf89;border-radius:12px;padding:12px;font-size:12px;line-height:1.55;margin-top:12px}.error{display:none;background:var(--dangerbg);color:var(--danger);border:1px solid #fecdca;border-radius:12px;padding:12px;font-size:12px;line-height:1.55;margin-top:12px}.error.show{display:block}
+.result{background:#101828;color:#fff;border:none}.result .label{color:#d0d5dd;font-size:13px}.big{font-size:34px;font-weight:900;letter-spacing:-1px;margin:5px 0 14px}.rows{display:grid;gap:10px}.row{display:flex;justify-content:space-between;gap:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.12)}.row span:first-child{color:#d0d5dd}.row strong{white-space:nowrap}.row.total strong{font-size:17px}
+.badge{display:inline-flex;align-items:center;gap:6px;background:#ecfdf3;color:var(--ok);font-weight:850;font-size:12px;padding:6px 9px;border-radius:999px}.meta{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 14px}.meta span{font-size:12px;color:#d0d5dd;background:rgba(255,255,255,.08);padding:6px 8px;border-radius:8px}
+.legal{font-size:12px;color:var(--muted);line-height:1.7;margin-top:12px}.actions{display:flex;gap:10px;margin-top:14px}.btn{flex:1;border:0;border-radius:12px;padding:13px 14px;font-size:15px;font-weight:850;cursor:pointer;min-height:48px}.btn.primary{background:var(--accent);color:white}.btn.secondary{background:#eef2f6;color:#344054}.btn:active{transform:translateY(1px)}
+.details{margin-top:10px;border-top:1px solid var(--line);padding-top:12px}.details summary{cursor:pointer;font-size:13px;font-weight:800;color:#344054}.formula{font-size:12px;color:var(--muted);line-height:1.7;margin-top:8px}
+footer{padding-top:22px;color:var(--muted);font-size:12px;line-height:1.6;text-align:center}
+@media (max-width:600px){.wrap{padding:12px 12px 56px}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}h1{font-size:27px}.big{font-size:30px}.card{padding:16px;border-radius:16px}.actions{position:sticky;bottom:8px;z-index:5}.result .actions{background:#101828;padding-top:8px}.scope span{font-size:11px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">PROJECT 001 · MVP v0.2</div>
+    <h1>잔특 계산기</h1>
+    <p class="sub">생산직·현장직용 <strong>잔업·특근 예상 월급 계산기</strong><br>근무패턴만 넣으면 이번 달 세전 총액을 빠르게 계산합니다.</p>
+    <div class="scope"><span>2026 기준</span><span>상시 5인 이상</span><span>주 40시간 월급제</span><span>참고용 예상치</span></div>
+  </section>
+
+  <section class="card">
+    <h2>1. 내 월급 기준</h2>
+    <div class="grid">
+      <div class="field full">
+        <label for="monthly">월 통상임금</label>
+        <div class="input-wrap"><input id="monthly" inputmode="numeric" value="2156880" aria-describedby="monthlyHelp" /><span class="unit">원</span></div>
+        <div class="hint" id="monthlyHelp"><span class="important">월급명세서의 ‘총지급액’을 그대로 넣는 칸이 아닙니다.</span> 기본급과 매월 정기·일률적으로 지급되어 통상임금에 포함되는 고정수당을 합한 금액을 입력하는 방식의 간편 계산입니다.</div>
+        <div class="quick">
+          <button type="button" class="chip" id="minWageBtn">2026 최저임금 월환산액 넣기</button>
+          <button type="button" class="chip" id="clearBaseBtn">직접 입력</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>계산된 통상시급</label>
+        <div class="input-wrap"><input id="hourly" readonly tabindex="-1" /><span class="unit">원</span></div>
+      </div>
+      <div class="field">
+        <label for="companySize">사업장 기준</label>
+        <div class="input-wrap"><select id="companySize"><option value="5plus" selected>상시 5인 이상</option><option value="under5">5인 미만 (현재 미지원)</option></select></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>2. 이번 달 평일 잔업</h2>
+    <div class="grid">
+      <div class="field">
+        <label for="otDaily">하루 잔업</label>
+        <div class="input-wrap"><input id="otDaily" type="number" min="0" step="0.5" value="2" /><span class="unit">시간</span></div>
+      </div>
+      <div class="field">
+        <label for="otDays">잔업한 날</label>
+        <div class="input-wrap"><input id="otDays" type="number" min="0" step="1" value="16" /><span class="unit">일</span></div>
+      </div>
+      <div class="field full">
+        <label for="nightHours">그중 야간(22:00~06:00) 근로</label>
+        <div class="input-wrap"><input id="nightHours" type="number" min="0" step="0.5" value="0" /><span class="unit">시간</span></div>
+        <div class="hint">위 평일 잔업 중 야간시간만 입력하세요. 연장 가산에 야간 가산 0.5배가 추가됩니다.</div>
+      </div>
+    </div>
+    <div class="error" id="otError" role="alert"></div>
+  </section>
+
+  <section class="card">
+    <h2>3. 이번 달 휴일·특근</h2>
+    <div class="grid">
+      <div class="field">
+        <label for="holidayDays">특근한 날</label>
+        <div class="input-wrap"><input id="holidayDays" type="number" min="0" step="1" value="2" /><span class="unit">일</span></div>
+      </div>
+      <div class="field">
+        <label for="holidayHoursPerDay">하루 실근로</label>
+        <div class="input-wrap"><input id="holidayHoursPerDay" type="number" min="0" max="24" step="0.5" value="8" /><span class="unit">시간</span></div>
+      </div>
+      <div class="field full">
+        <label for="holidayNight">특근 중 야간(22:00~06:00)</label>
+        <div class="input-wrap"><input id="holidayNight" type="number" min="0" step="0.5" value="0" /><span class="unit">시간</span></div>
+      </div>
+    </div>
+    <div class="error" id="holidayError" role="alert"></div>
+    <div class="warn">토요일이라고 무조건 법정 ‘휴일근로’가 되는 것은 아닙니다. 이 계산기는 <strong>회사에서 휴일로 정한 날 또는 법정휴일 근무</strong>를 전제로 합니다.</div>
+  </section>
+
+  <section class="card result" aria-live="polite">
+    <div class="badge">✓ 예상 세전 금액</div>
+    <div class="label" style="margin-top:14px">이번 달 예상 총지급액</div>
+    <div class="big" id="gross">0원</div>
+    <div class="meta"><span id="otHoursMeta">평일 잔업 0시간</span><span id="holidayHoursMeta">휴일근로 0시간</span><span id="hourlyMeta">시급 0원</span></div>
+    <div class="rows">
+      <div class="row"><span>월 통상임금</span><strong id="baseOut">0원</strong></div>
+      <div class="row"><span>평일 잔업수당</span><strong id="otOut">0원</strong></div>
+      <div class="row"><span>평일 야간 추가가산</span><strong id="nightOut">0원</strong></div>
+      <div class="row"><span>휴일·특근 수당</span><strong id="holidayOut">0원</strong></div>
+      <div class="row"><span>특근 야간 추가가산</span><strong id="holidayNightOut">0원</strong></div>
+      <div class="row total"><span>추가수당 합계</span><strong id="extraOut">0원</strong></div>
+    </div>
+    <div class="actions">
+      <button class="btn secondary" id="resetBtn" type="button">초기화</button>
+      <button class="btn primary" id="copyBtn" type="button">결과 복사</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>계산 기준</h2>
+    <div class="legal">
+      <strong>현재 지원 범위:</strong> 상시근로자 5인 이상, 주 40시간·월 209시간을 사용하는 일반적인 월급제 근로자의 간편 참고 계산.<br>
+      통상시급은 입력한 월 통상임금을 209시간으로 나눕니다. 연장근로는 통상시급의 1.5배, 야간근로는 22:00~06:00 근로시간에 0.5배 추가가산, 휴일근로는 8시간 이내 1.5배·8시간 초과분 2배로 계산합니다.
+    </div>
+    <details class="details">
+      <summary>왜 실제 급여와 다를 수 있나요?</summary>
+      <div class="formula">근로계약·취업규칙·단체협약, 통상임금에 포함되는 수당의 범위, 휴일 지정 방식, 교대제, 보상휴가, 포괄임금 약정 등 실제 조건에 따라 달라질 수 있습니다. 이 서비스는 급여명세서나 노무·법률 판단을 대신하지 않습니다.</div>
+    </details>
+  </section>
+
+  <footer>잔특 계산기 · PROJECT 001 · v0.2 QA build</footer>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const ids=['monthly','otDaily','otDays','nightHours','holidayDays','holidayHoursPerDay','holidayNight'];
+const num = id => Math.max(0, Number(String($(id).value).replace(/,/g,'')) || 0);
+const money = n => `${Math.round(n).toLocaleString('ko-KR')}원`;
+const showError = (id, message) => { const el=$(id); el.textContent=message||''; el.classList.toggle('show', Boolean(message)); };
+
+function calc(){
+  const base=num('monthly');
+  const hourly=base/209;
+  $('hourly').value=Math.round(hourly).toLocaleString('ko-KR');
+
+  const otHours=num('otDaily')*num('otDays');
+  const requestedNight=num('nightHours');
+  const night=Math.min(requestedNight, otHours);
+  showError('otError', requestedNight>otHours ? `야간근로 ${requestedNight}시간이 평일 잔업 총 ${otHours}시간보다 큽니다. 계산에는 최대 ${otHours}시간까지만 반영했습니다.` : '');
+
+  const hDays=num('holidayDays');
+  const rawHpd=num('holidayHoursPerDay');
+  const hpd=Math.min(rawHpd,24);
+  const totalHolidayHours=hDays*hpd;
+  const requestedHNight=num('holidayNight');
+  const hNight=Math.min(requestedHNight,totalHolidayHours);
+  let hError='';
+  if(rawHpd>24) hError='하루 특근시간은 24시간을 넘을 수 없어 계산에는 24시간까지만 반영했습니다.';
+  if(requestedHNight>totalHolidayHours) hError += `${hError?' ':''}특근 야간시간은 특근 총 ${totalHolidayHours}시간을 넘을 수 없어 최대치까지만 반영했습니다.`;
+  showError('holidayError',hError);
+
+  $('otHoursMeta').textContent=`평일 잔업 ${otHours.toLocaleString('ko-KR')}시간`;
+  $('holidayHoursMeta').textContent=`휴일근로 ${totalHolidayHours.toLocaleString('ko-KR')}시간`;
+  $('hourlyMeta').textContent=`시급 ${money(hourly)}`;
+
+  if($('companySize').value==='under5'){
+    ['gross','baseOut','otOut','nightOut','holidayOut','holidayNightOut','extraOut'].forEach(id=>$(id).textContent='현재 미지원');
+    return;
+  }
+
+  const first8=Math.min(8,hpd)*hDays;
+  const over8=Math.max(0,hpd-8)*hDays;
+  const otPay=hourly*1.5*otHours;
+  const nightPay=hourly*0.5*night;
+  const holidayPay=hourly*(1.5*first8+2*over8);
+  const holidayNightPay=hourly*0.5*hNight;
+  const extra=otPay+nightPay+holidayPay+holidayNightPay;
+  const gross=base+extra;
+
+  $('gross').textContent=money(gross);
+  $('baseOut').textContent=money(base);
+  $('otOut').textContent=money(otPay);
+  $('nightOut').textContent=money(nightPay);
+  $('holidayOut').textContent=money(holidayPay);
+  $('holidayNightOut').textContent=money(holidayNightPay);
+  $('extraOut').textContent=money(extra);
+}
+
+ids.forEach(id=>$(id).addEventListener('input',calc));
+$('companySize').addEventListener('change',calc);
+$('minWageBtn').addEventListener('click',()=>{ $('monthly').value='2156880'; calc(); $('monthly').focus(); });
+$('clearBaseBtn').addEventListener('click',()=>{ $('monthly').value=''; calc(); $('monthly').focus(); });
+$('resetBtn').addEventListener('click',()=>{
+  $('monthly').value='2156880';$('otDaily').value='0';$('otDays').value='0';$('nightHours').value='0';$('holidayDays').value='0';$('holidayHoursPerDay').value='8';$('holidayNight').value='0';$('companySize').value='5plus';calc();window.scrollTo({top:0,behavior:'smooth'});
+});
+$('copyBtn').addEventListener('click',async()=>{
+  const text=`잔특 계산기 결과\n예상 세전 총지급액: ${$('gross').textContent}\n추가수당: ${$('extraOut').textContent}\n평일 잔업: ${$('otHoursMeta').textContent.replace('평일 잔업 ','')}\n휴일근로: ${$('holidayHoursMeta').textContent.replace('휴일근로 ','')}\n(참고용 예상치)`;
+  try{await navigator.clipboard.writeText(text);$('copyBtn').textContent='복사됨 ✓';setTimeout(()=>$('copyBtn').textContent='결과 복사',1200)}catch(e){alert(text)}
+});
+calc();
+</script>
+</body>
+</html>
