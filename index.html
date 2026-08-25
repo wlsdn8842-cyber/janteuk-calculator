@@ -4,22 +4,21 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#101828" />
-<title>잔특 계산기 | 잔업·특근·야간수당 예상 월급 계산</title>
-<meta name="description" content="생산직·현장직을 위한 잔업·특근·야간수당 예상 월급 계산기. 월 통상임금과 근무시간을 입력하면 예상 세전 월급과 추가수당을 간편하게 계산합니다." />
+<title>잔특 계산기 | 시급·잔업·특근·교대 야간수당 예상 월급 계산</title>
+<meta name="description" content="생산직·현장직을 위한 잔업·특근·교대 야간수당 계산기. 시급 또는 월 통상임금을 기준으로 이번 달 예상 세전 월급과 추가수당을 계산합니다." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <meta name="application-name" content="잔특 계산기" />
 <link rel="canonical" href="https://wlsdn8842-cyber.github.io/janteuk-calculator/" />
 
-<!-- Open Graph: 카카오톡·메신저·SNS 공유 미리보기 -->
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:site_name" content="잔특 계산기" />
 <meta property="og:url" content="https://wlsdn8842-cyber.github.io/janteuk-calculator/" />
-<meta property="og:title" content="잔특 계산기 | 잔업·특근·야간수당 예상 월급 계산" />
-<meta property="og:description" content="월 통상임금과 잔업·야간·특근 시간을 넣으면 이번 달 예상 세전 월급과 추가수당을 빠르게 계산합니다." />
+<meta property="og:title" content="잔특 계산기 | 시급·잔업·특근·교대 야간수당 계산" />
+<meta property="og:description" content="시급 또는 월 통상임금을 넣고 잔업·특근·교대 야간시간을 입력하면 예상 세전 월급과 추가수당을 빠르게 계산합니다." />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="잔특 계산기 | 잔업·특근·야간수당 예상 월급 계산" />
-<meta name="twitter:description" content="잔업·야간·특근 시간을 넣고 이번 달 예상 세전 월급과 추가수당을 빠르게 계산해보세요." />
+<meta name="twitter:title" content="잔특 계산기 | 시급·잔업·특근·교대 야간수당 계산" />
+<meta name="twitter:description" content="생산직·현장직용 잔업·특근·교대 야간수당 예상 월급 계산기" />
 
 <script type="application/ld+json">
 {
@@ -27,7 +26,7 @@
   "@type": "WebApplication",
   "name": "잔특 계산기",
   "url": "https://wlsdn8842-cyber.github.io/janteuk-calculator/",
-  "description": "생산직·현장직을 위한 잔업·특근·야간수당 예상 월급 계산기",
+  "description": "생산직·현장직을 위한 시급·잔업·특근·교대 야간수당 예상 월급 계산기",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Any",
   "inLanguage": "ko-KR",
@@ -35,13 +34,10 @@
 }
 </script>
 
-<!-- Google Analytics 4
-     GA4 측정 ID G-C3CDBRXZYX 연결 완료.
-     측정 ID를 받기 전에는 아무 데이터도 외부로 전송하지 않습니다. -->
 <script>
 (function(){
   const GA_MEASUREMENT_ID = 'G-C3CDBRXZYX';
-  if (!/^G-[A-Z0-9]+$/.test(GA_MEASUREMENT_ID) || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
+  if (!/^G-[A-Z0-9]+$/.test(GA_MEASUREMENT_ID)) return;
   const tag = document.createElement('script');
   tag.async = true;
   tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_MEASUREMENT_ID);
@@ -52,56 +48,86 @@
   gtag('config', GA_MEASUREMENT_ID);
 })();
 </script>
+
 <style>
-:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e7ec;--accent:#1d4ed8;--accent2:#eff6ff;--danger:#b42318;--dangerbg:#fef3f2;--ok:#067647;--warn:#7a2e0e;--warnbg:#fffaeb}
+:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e7ec;--accent:#1d4ed8;--accent2:#eff6ff;--danger:#b42318;--dangerbg:#fef3f2;--ok:#067647;--okbg:#ecfdf3;--warn:#7a2e0e;--warnbg:#fffaeb}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;background:var(--bg);color:var(--text)}
-button,input,select{font:inherit}
-.wrap{max-width:760px;margin:0 auto;padding:20px 16px 72px}
+button,input,select{font:inherit}.wrap{max-width:760px;margin:0 auto;padding:20px 16px 72px}
 .hero{padding:18px 2px 10px}.eyebrow{font-size:13px;font-weight:850;color:var(--accent)}
 h1{font-size:30px;line-height:1.15;margin:7px 0 8px;letter-spacing:-.7px}.sub{margin:0;color:var(--muted);line-height:1.55}
 .scope{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.scope span{font-size:12px;font-weight:800;padding:6px 9px;border-radius:999px;background:#fff;border:1px solid var(--line)}
+.update{margin-top:12px;background:var(--okbg);border:1px solid #abefc6;color:#05603a;border-radius:12px;padding:10px 12px;font-size:12px;font-weight:750;line-height:1.5}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:14px;box-shadow:0 4px 18px rgba(16,24,40,.04)}
 .card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}
 label{font-size:14px;font-weight:780}.hint{font-size:12px;color:var(--muted);line-height:1.5}.important{color:#344054;font-weight:750}
 .input-wrap{position:relative}.input-wrap input,.input-wrap select{width:100%;border:1px solid #d0d5dd;border-radius:12px;padding:13px 48px 13px 13px;font-size:16px;background:#fff;color:var(--text);outline:none;min-height:49px}.input-wrap select{padding-right:13px}.input-wrap input:focus,.input-wrap select:focus{border-color:#84adff;box-shadow:0 0 0 3px #eff4ff}.input-wrap input[readonly]{background:#f9fafb;color:#475467}.unit{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--muted);pointer-events:none}
-.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-size:13px;font-weight:750;cursor:pointer}.chip:hover{background:#f9fafb}.chip:focus-visible,.btn:focus-visible{outline:3px solid #84adff;outline-offset:2px}
+.mode-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}.mode-btn{border:1px solid var(--line);background:#fff;color:#475467;border-radius:12px;padding:11px 10px;font-weight:800;cursor:pointer}.mode-btn.active{background:var(--accent2);border-color:#84adff;color:var(--accent)}
+.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-size:13px;font-weight:750;cursor:pointer}.chip:hover{background:#f9fafb}.chip:focus-visible,.btn:focus-visible,.mode-btn:focus-visible{outline:3px solid #84adff;outline-offset:2px}
 .info{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:12px;line-height:1.55;margin-top:12px}.warn{background:var(--warnbg);color:var(--warn);border:1px solid #fedf89;border-radius:12px;padding:12px;font-size:12px;line-height:1.55;margin-top:12px}.error{display:none;background:var(--dangerbg);color:var(--danger);border:1px solid #fecdca;border-radius:12px;padding:12px;font-size:12px;line-height:1.55;margin-top:12px}.error.show{display:block}
 .result{background:#101828;color:#fff;border:none}.result .label{color:#d0d5dd;font-size:13px}.big{font-size:34px;font-weight:900;letter-spacing:-1px;margin:5px 0 14px}.rows{display:grid;gap:10px}.row{display:flex;justify-content:space-between;gap:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.12)}.row span:first-child{color:#d0d5dd}.row strong{white-space:nowrap}.row.total strong{font-size:17px}
 .badge{display:inline-flex;align-items:center;gap:6px;background:#ecfdf3;color:var(--ok);font-weight:850;font-size:12px;padding:6px 9px;border-radius:999px}.meta{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 14px}.meta span{font-size:12px;color:#d0d5dd;background:rgba(255,255,255,.08);padding:6px 8px;border-radius:8px}
 .legal{font-size:12px;color:var(--muted);line-height:1.7;margin-top:12px}.actions{display:flex;gap:10px;margin-top:14px}.btn{flex:1;border:0;border-radius:12px;padding:13px 14px;font-size:15px;font-weight:850;cursor:pointer;min-height:48px}.btn.primary{background:var(--accent);color:white}.btn.secondary{background:#eef2f6;color:#344054}.btn:active{transform:translateY(1px)}
-.details{margin-top:10px;border-top:1px solid var(--line);padding-top:12px}.details summary{cursor:pointer;font-size:13px;font-weight:800;color:#344054}.formula{font-size:12px;color:var(--muted);line-height:1.7;margin-top:8px}
+.details{margin-top:10px;border-top:1px solid var(--line);padding-top:12px}.details summary{cursor:pointer;font-size:13px;font-weight:800;color:#344054}.formula{font-size:12px;color:var(--muted);line-height:1.7;margin-top:8px}.hidden{display:none!important}
 footer{padding-top:22px;color:var(--muted);font-size:12px;line-height:1.6;text-align:center}
-@media (max-width:600px){.wrap{padding:12px 12px 56px}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}h1{font-size:27px}.big{font-size:30px}.card{padding:16px;border-radius:16px}.actions{position:sticky;bottom:8px;z-index:5}.result .actions{background:#101828;padding-top:8px}.scope span{font-size:11px}}
+@media (max-width:600px){.wrap{padding:12px 12px 56px}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}h1{font-size:27px}.big{font-size:30px}.card{padding:16px;border-radius:16px}.actions{position:sticky;bottom:8px;z-index:5}.result .actions{background:#101828;padding-top:8px}.scope span{font-size:11px}.mode-toggle{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 <main class="wrap">
   <section class="hero">
-    <div class="eyebrow">PROJECT 001 · PUBLIC v0.3</div>
+    <div class="eyebrow">PROJECT 001 · PUBLIC v0.4</div>
     <h1>잔특 계산기</h1>
-    <p class="sub">생산직·현장직용 <strong>잔업·특근·야간수당 예상 월급 계산기</strong><br>근무패턴만 넣으면 이번 달 예상 세전 총액과 추가수당을 빠르게 계산합니다.</p>
-    <div class="scope"><span>2026 기준</span><span>상시 5인 이상</span><span>주 40시간 월급제</span><span>참고용 예상치</span></div>
+    <p class="sub">생산직·현장직용 <strong>잔업·특근·교대 야간수당 예상 월급 계산기</strong><br>시급 또는 월 통상임금을 기준으로 이번 달 예상 세전 총액과 추가수당을 계산합니다.</p>
+    <div class="scope"><span>2026 기준</span><span>상시 5인 이상</span><span>주 40시간·209시간 기준</span><span>참고용 예상치</span></div>
+    <div class="update">✓ 사용자 피드백 반영: <strong>시급 입력 방식</strong> + <strong>교대·정규근무 야간시간</strong>을 추가했습니다.</div>
   </section>
 
   <section class="card">
-    <h2>1. 내 월급 기준</h2>
-    <div class="grid">
-      <div class="field full">
-        <label for="monthly">월 통상임금</label>
-        <div class="input-wrap"><input id="monthly" inputmode="numeric" value="2156880" aria-describedby="monthlyHelp" /><span class="unit">원</span></div>
-        <div class="hint" id="monthlyHelp"><span class="important">월급명세서의 ‘총지급액’을 그대로 넣는 칸이 아닙니다.</span> 기본급과 매월 정기·일률적으로 지급되어 통상임금에 포함되는 고정수당을 합한 금액을 입력하는 방식의 간편 계산입니다.</div>
-        <div class="quick">
-          <button type="button" class="chip" id="minWageBtn">2026 최저임금 월환산액 넣기</button>
-          <button type="button" class="chip" id="clearBaseBtn">직접 입력</button>
+    <h2>1. 내 임금 기준</h2>
+    <div class="mode-toggle" aria-label="임금 입력 방식">
+      <button type="button" class="mode-btn active" id="hourlyModeBtn" aria-pressed="true">시급으로 계산</button>
+      <button type="button" class="mode-btn" id="monthlyModeBtn" aria-pressed="false">월 통상임금으로 계산</button>
+    </div>
+
+    <div id="hourlyModeFields">
+      <div class="grid">
+        <div class="field full">
+          <label for="baseHourly">내 시급</label>
+          <div class="input-wrap"><input id="baseHourly" inputmode="numeric" value="10320" /><span class="unit">원</span></div>
+          <div class="hint">주 40시간·월 209시간 기준으로 <strong>월 환산 기준액 = 시급 × 209시간</strong>으로 간편 계산합니다.</div>
+          <div class="quick"><button type="button" class="chip" id="minHourlyBtn">2026 최저시급 10,320원 넣기</button><button type="button" class="chip" id="clearHourlyBtn">직접 입력</button></div>
+        </div>
+        <div class="field">
+          <label>월 환산 기준액</label>
+          <div class="input-wrap"><input id="derivedMonthly" readonly tabindex="-1" /><span class="unit">원</span></div>
+        </div>
+        <div class="field">
+          <label>계산에 쓰는 통상시급</label>
+          <div class="input-wrap"><input id="derivedHourly" readonly tabindex="-1" /><span class="unit">원</span></div>
         </div>
       </div>
-      <div class="field">
-        <label>계산된 통상시급</label>
-        <div class="input-wrap"><input id="hourly" readonly tabindex="-1" /><span class="unit">원</span></div>
+      <div class="info">시급제라도 실제 월 기본급·통상임금은 근무일수, 유급주휴, 고정수당 등에 따라 달라질 수 있습니다. <strong>별도 고정 통상수당이 있는 경우에는 ‘월 통상임금으로 계산’이 더 적합합니다.</strong></div>
+    </div>
+
+    <div id="monthlyModeFields" class="hidden">
+      <div class="grid">
+        <div class="field full">
+          <label for="monthly">월 통상임금</label>
+          <div class="input-wrap"><input id="monthly" inputmode="numeric" value="2156880" aria-describedby="monthlyHelp" /><span class="unit">원</span></div>
+          <div class="hint" id="monthlyHelp"><span class="important">월급명세서의 ‘총지급액’을 그대로 넣는 칸이 아닙니다.</span> 기본급과 통상임금에 포함되는 고정수당을 합한 월 기준액을 입력합니다.</div>
+          <div class="quick"><button type="button" class="chip" id="minMonthlyBtn">2026 최저임금 월환산액 넣기</button><button type="button" class="chip" id="clearMonthlyBtn">직접 입력</button></div>
+        </div>
+        <div class="field">
+          <label>계산된 통상시급</label>
+          <div class="input-wrap"><input id="monthlyHourly" readonly tabindex="-1" /><span class="unit">원</span></div>
+        </div>
       </div>
-      <div class="field">
+    </div>
+
+    <div class="grid" style="margin-top:12px">
+      <div class="field full">
         <label for="companySize">사업장 기준</label>
         <div class="input-wrap"><select id="companySize"><option value="5plus" selected>상시 5인 이상</option><option value="under5">5인 미만 (현재 미지원)</option></select></div>
       </div>
@@ -111,38 +137,38 @@ footer{padding-top:22px;color:var(--muted);font-size:12px;line-height:1.6;text-a
   <section class="card">
     <h2>2. 이번 달 평일 잔업</h2>
     <div class="grid">
-      <div class="field">
-        <label for="otDaily">하루 잔업</label>
-        <div class="input-wrap"><input id="otDaily" type="number" min="0" step="0.5" value="2" /><span class="unit">시간</span></div>
-      </div>
-      <div class="field">
-        <label for="otDays">잔업한 날</label>
-        <div class="input-wrap"><input id="otDays" type="number" min="0" step="1" value="16" /><span class="unit">일</span></div>
-      </div>
+      <div class="field"><label for="otDaily">하루 잔업</label><div class="input-wrap"><input id="otDaily" type="number" min="0" step="0.5" value="0" /><span class="unit">시간</span></div></div>
+      <div class="field"><label for="otDays">잔업한 날</label><div class="input-wrap"><input id="otDays" type="number" min="0" step="1" value="0" /><span class="unit">일</span></div></div>
       <div class="field full">
         <label for="nightHours">그중 야간(22:00~06:00) 근로</label>
         <div class="input-wrap"><input id="nightHours" type="number" min="0" step="0.5" value="0" /><span class="unit">시간</span></div>
-        <div class="hint"><strong>야간 추가가산(+50%)</strong>을 계산하기 위한 시간입니다. 기존 평일 잔업수당에 별도로 더해지는 금액이며, 야간근로의 전체 시급이 0.5배라는 뜻이 아닙니다.</div>
+        <div class="hint"><strong>평일 잔업시간 안에서 야간까지 이어진 시간</strong>만 입력하세요. 기존 잔업수당에 야간 추가가산(+50%)이 더해집니다.</div>
       </div>
     </div>
     <div class="error" id="otError" role="alert"></div>
   </section>
 
   <section class="card">
-    <h2>3. 이번 달 휴일·특근</h2>
+    <h2>3. 교대·정규근무 중 야간</h2>
     <div class="grid">
-      <div class="field">
-        <label for="holidayDays">특근한 날</label>
-        <div class="input-wrap"><input id="holidayDays" type="number" min="0" step="1" value="2" /><span class="unit">일</span></div>
+      <div class="field full">
+        <label for="shiftNightHours">이번 달 야간근로 총시간 (22:00~06:00)</label>
+        <div class="input-wrap"><input id="shiftNightHours" type="number" min="0" step="0.5" value="0" /><span class="unit">시간</span></div>
+        <div class="hint">교대근무 또는 정규근무 시간 중 발생한 야간시간을 입력하세요. <strong>위 평일 잔업 야간시간과 아래 특근 야간시간에 이미 넣은 시간은 중복 입력하지 마세요.</strong></div>
       </div>
-      <div class="field">
-        <label for="holidayHoursPerDay">하루 실근로</label>
-        <div class="input-wrap"><input id="holidayHoursPerDay" type="number" min="0" max="24" step="0.5" value="8" /><span class="unit">시간</span></div>
-      </div>
+    </div>
+    <div class="info">예: 20:00~08:00 교대근무라면 실제 휴게시간을 제외하고 22:00~06:00 구간에 해당하는 근로시간만 합산합니다. 이 버전은 2조2교대·4조2교대 같은 근무표 자동 계산은 하지 않습니다.</div>
+  </section>
+
+  <section class="card">
+    <h2>4. 이번 달 휴일·특근</h2>
+    <div class="grid">
+      <div class="field"><label for="holidayDays">특근한 날</label><div class="input-wrap"><input id="holidayDays" type="number" min="0" step="1" value="0" /><span class="unit">일</span></div></div>
+      <div class="field"><label for="holidayHoursPerDay">하루 실근로</label><div class="input-wrap"><input id="holidayHoursPerDay" type="number" min="0" max="24" step="0.5" value="8" /><span class="unit">시간</span></div></div>
       <div class="field full">
         <label for="holidayNight">특근 중 야간(22:00~06:00)</label>
         <div class="input-wrap"><input id="holidayNight" type="number" min="0" step="0.5" value="0" /><span class="unit">시간</span></div>
-        <div class="hint"><strong>야간 추가가산(+50%)</strong>을 계산하기 위한 시간입니다. 기존 휴일·특근수당에 별도로 더해지는 금액입니다.</div>
+        <div class="hint">특근시간 중 야간에 해당하는 시간입니다. 기존 휴일·특근수당에 야간 추가가산(+50%)이 더해집니다.</div>
       </div>
     </div>
     <div class="error" id="holidayError" role="alert"></div>
@@ -153,53 +179,80 @@ footer{padding-top:22px;color:var(--muted);font-size:12px;line-height:1.6;text-a
     <div class="badge">✓ 예상 세전 금액</div>
     <div class="label" style="margin-top:14px">이번 달 예상 총지급액</div>
     <div class="big" id="gross">0원</div>
-    <div class="meta"><span id="otHoursMeta">평일 잔업 0시간</span><span id="holidayHoursMeta">휴일근로 0시간</span><span id="hourlyMeta">시급 0원</span></div>
+    <div class="meta"><span id="basisMeta">시급 기준</span><span id="otHoursMeta">평일 잔업 0시간</span><span id="shiftNightMeta">교대 야간 0시간</span><span id="holidayHoursMeta">휴일근로 0시간</span></div>
     <div class="rows">
-      <div class="row"><span>월 통상임금</span><strong id="baseOut">0원</strong></div>
+      <div class="row"><span id="baseLabel">월 환산 기준액</span><strong id="baseOut">0원</strong></div>
+      <div class="row"><span>계산 통상시급</span><strong id="hourlyOut">0원</strong></div>
       <div class="row"><span>평일 잔업수당</span><strong id="otOut">0원</strong></div>
-      <div class="row"><span>평일 야간 추가가산 (+50%)</span><strong id="nightOut">0원</strong></div>
+      <div class="row"><span>평일 잔업 중 야간 추가가산 (+50%)</span><strong id="nightOut">0원</strong></div>
+      <div class="row"><span>교대·정규근무 야간 추가가산 (+50%)</span><strong id="shiftNightOut">0원</strong></div>
       <div class="row"><span>휴일·특근 수당</span><strong id="holidayOut">0원</strong></div>
       <div class="row"><span>특근 야간 추가가산 (+50%)</span><strong id="holidayNightOut">0원</strong></div>
       <div class="row total"><span>추가수당 합계</span><strong id="extraOut">0원</strong></div>
     </div>
-    <div style="margin-top:12px;font-size:12px;line-height:1.55;color:#d0d5dd">※ 야간 추가가산은 기존 잔업·특근수당에 <strong style="color:#fff">추가로 더해지는 0.5배 금액</strong>입니다.</div>
-    <div class="actions">
-      <button class="btn secondary" id="resetBtn" type="button">초기화</button>
-      <button class="btn primary" id="copyBtn" type="button">결과 복사</button>
-    </div>
+    <div style="margin-top:12px;font-size:12px;line-height:1.55;color:#d0d5dd">※ 야간 추가가산은 기존 임금·잔업·특근수당에 <strong style="color:#fff">추가로 더해지는 0.5배 금액</strong>입니다. 같은 야간시간을 여러 칸에 중복 입력하지 마세요.</div>
+    <div class="actions"><button class="btn secondary" id="resetBtn" type="button">초기화</button><button class="btn primary" id="copyBtn" type="button">결과 복사</button></div>
   </section>
 
   <section class="card">
     <h2>계산 기준</h2>
     <div class="legal">
-      <strong>현재 지원 범위:</strong> 상시근로자 5인 이상, 주 40시간·월 209시간을 사용하는 일반적인 월급제 근로자의 간편 참고 계산.<br>
-      통상시급은 입력한 월 통상임금을 209시간으로 나눕니다. 연장근로는 통상시급의 1.5배, 야간근로는 22:00~06:00 근로시간에 0.5배 추가가산, 휴일근로는 8시간 이내 1.5배·8시간 초과분 2배로 계산합니다.
+      <strong>현재 지원 범위:</strong> 상시근로자 5인 이상, 주 40시간·월 209시간 기준의 간편 참고 계산.<br>
+      시급 모드는 입력 시급 × 209시간을 월 환산 기준액으로 사용하며, 월 통상임금 모드는 입력액 ÷ 209시간으로 통상시급을 구합니다. 연장근로는 통상시급의 1.5배, 야간근로는 22:00~06:00 실제 근로시간에 0.5배 추가가산, 휴일근로는 8시간 이내 1.5배·8시간 초과분 2배로 계산합니다.
     </div>
-    <details class="details">
-      <summary>왜 실제 급여와 다를 수 있나요?</summary>
-      <div class="formula">근로계약·취업규칙·단체협약, 통상임금에 포함되는 수당의 범위, 휴일 지정 방식, 교대제, 보상휴가, 포괄임금 약정 등 실제 조건에 따라 달라질 수 있습니다. 이 서비스는 급여명세서나 노무·법률 판단을 대신하지 않습니다.</div>
-    </details>
+    <details class="details"><summary>왜 실제 급여와 다를 수 있나요?</summary><div class="formula">근로계약·취업규칙·단체협약, 통상임금에 포함되는 수당, 실제 소정근로시간, 유급주휴, 휴게시간, 휴일 지정 방식, 교대제, 보상휴가, 포괄임금 약정 등에 따라 달라질 수 있습니다. 이 서비스는 급여명세서나 노무·법률 판단을 대신하지 않습니다.</div></details>
   </section>
 
-  <footer>잔특 계산기 · PROJECT 001 · v0.3 public build</footer>
+  <footer>잔특 계산기 · PROJECT 001 · v0.4 user-feedback build</footer>
 </main>
+
 <script>
 const $ = id => document.getElementById(id);
-const ids=['monthly','otDaily','otDays','nightHours','holidayDays','holidayHoursPerDay','holidayNight'];
+let payMode = 'hourly';
+const ids=['baseHourly','monthly','otDaily','otDays','nightHours','shiftNightHours','holidayDays','holidayHoursPerDay','holidayNight'];
 const num = id => Math.max(0, Number(String($(id).value).replace(/,/g,'')) || 0);
 const money = n => `${Math.round(n).toLocaleString('ko-KR')}원`;
 const showError = (id, message) => { const el=$(id); el.textContent=message||''; el.classList.toggle('show', Boolean(message)); };
+const track = (eventName, params={}) => { if(typeof window.gtag==='function') window.gtag('event',eventName,params); };
+
+function setMode(mode, shouldTrack=true){
+  payMode=mode;
+  const hourly=mode==='hourly';
+  $('hourlyModeFields').classList.toggle('hidden',!hourly);
+  $('monthlyModeFields').classList.toggle('hidden',hourly);
+  $('hourlyModeBtn').classList.toggle('active',hourly);
+  $('monthlyModeBtn').classList.toggle('active',!hourly);
+  $('hourlyModeBtn').setAttribute('aria-pressed',String(hourly));
+  $('monthlyModeBtn').setAttribute('aria-pressed',String(!hourly));
+  if(shouldTrack) track('pay_mode_change',{pay_mode:mode});
+  calc();
+}
 
 function calc(){
-  const base=num('monthly');
-  const hourly=base/209;
-  $('hourly').value=Math.round(hourly).toLocaleString('ko-KR');
+  let base=0, hourly=0, companySize='5plus';
+  if(payMode==='hourly'){
+    hourly=num('baseHourly');
+    base=hourly*209;
+    companySize=$('companySize').value;
+    $('derivedMonthly').value=Math.round(base).toLocaleString('ko-KR');
+    $('derivedHourly').value=Math.round(hourly).toLocaleString('ko-KR');
+    $('basisMeta').textContent=`시급 ${money(hourly)} 기준`;
+    $('baseLabel').textContent='월 환산 기준액 (시급×209)';
+  }else{
+    base=num('monthly');
+    hourly=base/209;
+    companySize=$('companySize').value;
+    $('monthlyHourly').value=Math.round(hourly).toLocaleString('ko-KR');
+    $('basisMeta').textContent=`월 통상임금 ${money(base)} 기준`;
+    $('baseLabel').textContent='월 통상임금';
+  }
 
   const otHours=num('otDaily')*num('otDays');
   const requestedNight=num('nightHours');
-  const night=Math.min(requestedNight, otHours);
-  showError('otError', requestedNight>otHours ? `야간근로 ${requestedNight}시간이 평일 잔업 총 ${otHours}시간보다 큽니다. 계산에는 최대 ${otHours}시간까지만 반영했습니다.` : '');
+  const night=Math.min(requestedNight,otHours);
+  showError('otError', requestedNight>otHours ? `평일 잔업 중 야간 ${requestedNight}시간이 잔업 총 ${otHours}시간보다 큽니다. 계산에는 최대 ${otHours}시간까지만 반영했습니다.` : '');
 
+  const shiftNight=num('shiftNightHours');
   const hDays=num('holidayDays');
   const rawHpd=num('holidayHoursPerDay');
   const hpd=Math.min(rawHpd,24);
@@ -212,11 +265,11 @@ function calc(){
   showError('holidayError',hError);
 
   $('otHoursMeta').textContent=`평일 잔업 ${otHours.toLocaleString('ko-KR')}시간`;
+  $('shiftNightMeta').textContent=`교대 야간 ${shiftNight.toLocaleString('ko-KR')}시간`;
   $('holidayHoursMeta').textContent=`휴일근로 ${totalHolidayHours.toLocaleString('ko-KR')}시간`;
-  $('hourlyMeta').textContent=`시급 ${money(hourly)}`;
 
-  if($('companySize').value==='under5'){
-    ['gross','baseOut','otOut','nightOut','holidayOut','holidayNightOut','extraOut'].forEach(id=>$(id).textContent='현재 미지원');
+  if(companySize==='under5'){
+    ['gross','baseOut','hourlyOut','otOut','nightOut','shiftNightOut','holidayOut','holidayNightOut','extraOut'].forEach(id=>$(id).textContent='현재 미지원');
     return;
   }
 
@@ -224,15 +277,18 @@ function calc(){
   const over8=Math.max(0,hpd-8)*hDays;
   const otPay=hourly*1.5*otHours;
   const nightPay=hourly*0.5*night;
+  const shiftNightPay=hourly*0.5*shiftNight;
   const holidayPay=hourly*(1.5*first8+2*over8);
   const holidayNightPay=hourly*0.5*hNight;
-  const extra=otPay+nightPay+holidayPay+holidayNightPay;
+  const extra=otPay+nightPay+shiftNightPay+holidayPay+holidayNightPay;
   const gross=base+extra;
 
   $('gross').textContent=money(gross);
   $('baseOut').textContent=money(base);
+  $('hourlyOut').textContent=money(hourly);
   $('otOut').textContent=money(otPay);
   $('nightOut').textContent=money(nightPay);
+  $('shiftNightOut').textContent=money(shiftNightPay);
   $('holidayOut').textContent=money(holidayPay);
   $('holidayNightOut').textContent=money(holidayNightPay);
   $('extraOut').textContent=money(extra);
@@ -240,16 +296,20 @@ function calc(){
 
 ids.forEach(id=>$(id).addEventListener('input',calc));
 $('companySize').addEventListener('change',calc);
-$('minWageBtn').addEventListener('click',()=>{ $('monthly').value='2156880'; calc(); $('monthly').focus(); });
-$('clearBaseBtn').addEventListener('click',()=>{ $('monthly').value=''; calc(); $('monthly').focus(); });
+$('hourlyModeBtn').addEventListener('click',()=>setMode('hourly'));
+$('monthlyModeBtn').addEventListener('click',()=>setMode('monthly'));
+$('minHourlyBtn').addEventListener('click',()=>{$('baseHourly').value='10320';calc();$('baseHourly').focus();});
+$('clearHourlyBtn').addEventListener('click',()=>{$('baseHourly').value='';calc();$('baseHourly').focus();});
+$('minMonthlyBtn').addEventListener('click',()=>{$('monthly').value='2156880';calc();$('monthly').focus();});
+$('clearMonthlyBtn').addEventListener('click',()=>{$('monthly').value='';calc();$('monthly').focus();});
 $('resetBtn').addEventListener('click',()=>{
-  $('monthly').value='2156880';$('otDaily').value='0';$('otDays').value='0';$('nightHours').value='0';$('holidayDays').value='0';$('holidayHoursPerDay').value='8';$('holidayNight').value='0';$('companySize').value='5plus';calc();window.scrollTo({top:0,behavior:'smooth'});
+  $('baseHourly').value='10320';$('monthly').value='2156880';$('otDaily').value='0';$('otDays').value='0';$('nightHours').value='0';$('shiftNightHours').value='0';$('holidayDays').value='0';$('holidayHoursPerDay').value='8';$('holidayNight').value='0';$('companySize').value='5plus';setMode('hourly',false);track('calculator_reset');window.scrollTo({top:0,behavior:'smooth'});
 });
 $('copyBtn').addEventListener('click',async()=>{
-  const text=`잔특 계산기 결과\n예상 세전 총지급액: ${$('gross').textContent}\n추가수당: ${$('extraOut').textContent}\n평일 잔업: ${$('otHoursMeta').textContent.replace('평일 잔업 ','')}\n휴일근로: ${$('holidayHoursMeta').textContent.replace('휴일근로 ','')}\n※ 야간 가산은 기존 수당에 추가되는 +50% 금액\n(참고용 예상치 · v0.3)`;
-  try{await navigator.clipboard.writeText(text);$('copyBtn').textContent='복사됨 ✓';setTimeout(()=>$('copyBtn').textContent='결과 복사',1200)}catch(e){alert(text)}
+  const text=`잔특 계산기 결과 (v0.4)\n예상 세전 총지급액: ${$('gross').textContent}\n계산 통상시급: ${$('hourlyOut').textContent}\n추가수당: ${$('extraOut').textContent}\n평일 잔업: ${$('otHoursMeta').textContent.replace('평일 잔업 ','')}\n교대·정규근무 야간: ${$('shiftNightMeta').textContent.replace('교대 야간 ','')}\n휴일근로: ${$('holidayHoursMeta').textContent.replace('휴일근로 ','')}\n※ 같은 야간시간은 중복 입력하지 않음\n(참고용 예상치)`;
+  try{await navigator.clipboard.writeText(text);$('copyBtn').textContent='복사됨 ✓';track('result_copy',{pay_mode:payMode});setTimeout(()=>$('copyBtn').textContent='결과 복사',1200)}catch(e){alert(text)}
 });
-calc();
+setMode('hourly',false);
 </script>
 </body>
 </html>
